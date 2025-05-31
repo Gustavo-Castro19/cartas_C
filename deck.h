@@ -14,9 +14,11 @@ typedef struct Card {
   struct card_t *next;
 }card_t;
 
-card_t give_hand();
-void push_tail(struct card_t **hand,struct card_t *new);
-void pop_up(struct card_t **hand);
-void search(struct card_t *hand);
+card_t *give_hand(card_t *deck,int size);
+void push_tail(card_t **hand,struct card_t *new);
+void pop_up(card_t **hand);
+void search(card_t *hand);
+void debug_print(card_t *hand,int size);
+const char *printnaip(naip_t naipes);
 
-#endif Deck_h
+#endif 
