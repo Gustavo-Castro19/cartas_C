@@ -4,14 +4,19 @@
 
 
 card_t *give_hand(card_t *cards,int size){
-  // TODO DO THE ERR VERIFICATION  
-  const naip_t naips[4]={HEARTHS,SPADES,CLUBS,DIAMONDS};
+
+  if(cards==NULL){
+    fprintf(stderr, "ERROR: DECK ISN'T CORRECTLY ALLOCATED \n");
+    return NULL;
+  }
+
+  const naip_t naips[4]={HEARTS,SPADES,CLUBS,DIAMONDS};
   int count=0;
   for(int i=0;i<4;i++){
-    for (int j=0;j<13;j++) {
+    for (int j=1;j<=13;j++) {
       cards[count].suite=naips[i];
       cards[count].rank=j;
-      count<52 ? cards[count].next=&cards[count+1] : cards[count].next=NULL; //FIX THIS LINE 
+      cards[count].next= (count<51) ? &cards[count+1]:NULL; 
       count++;
     }
   }
@@ -19,22 +24,22 @@ card_t *give_hand(card_t *cards,int size){
 }
 
 void debug_print(card_t* deck,int size){
-  // TODO REDO THE LOGIC WITH A CURRENT VARIABLE 
-  if(!deck){
-    printf("error: deck is empty");
+  card_t* current=deck;
+  if(!current){
+    fprintf(stderr,"deck couldn't be printed: NULL POINTER EXCEPTION\n");
     return;
   }
 
-  while(deck->next!=NULL){
-    printf("rank: %d suite: %s\r\n",deck->rank,printnaip(deck->suite));
-    deck=deck->next;
+  while(current!=NULL){
+    printf("rank: %d suite: %s\r\n",current->rank,printnaip(current->suite));
+    current=current->next;
   }
 
 }
 
 const char *printnaip(naip_t naipes){
   switch (naipes) {
-    case HEARTHS:
+    case HEARTS:
       return "of hearths";
     case SPADES:
       return "of spades";
