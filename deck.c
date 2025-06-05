@@ -50,3 +50,37 @@ const char *printnaip(naip_t naipes){
   }
   return "unreachable string";
 }
+
+void push_tail(card_t **head,card_t *new){
+ if (!head || !new){
+    return;
+  }
+  if((*head)==NULL){
+    *head=new;
+    return;
+  }
+  card_t *current=*head;
+  while(current->next!=NULL){
+    current=current->next;
+  }
+  current->next=new;
+}
+
+void pop_tail(card_t **head) {
+    if(!head || !*head){
+        fprintf(stderr,"A LISTA ESTA VAZIA IMPOSSIVEL DELETAR ELEMENTO\n");
+        return;
+    }
+    
+    if((*head)->next == NULL){
+        *head = NULL;  
+        return;
+    }
+    
+    card_t *current = *head;
+    while(current->next->next != NULL){
+        current = current->next;
+    }
+    
+    current->next = NULL;
+}

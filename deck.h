@@ -16,8 +16,7 @@ typedef struct Card {
 
 card_t *give_hand(card_t *deck,int size);
 void push_tail(card_t **hand,card_t *new);
-void pop_up(card_t **hand);
-void search(card_t *hand);
+void pop_tail(card_t **hand);
 void debug_print(card_t *hand,int size);
 const char *printnaip(naip_t naipes);
 
